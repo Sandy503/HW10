@@ -46,5 +46,23 @@ newTeam = () => {
         nextEmployee();
     });
 };
+ 
+nextEmployee = () => {
+    return inquirer.prompt([
+        {
+            type: "list",
+            message: "What type of employee would you like to add?",
+            name: "employee",
+            choices: ["Engineer", "Intern"]
+        }
+    ]).then(data => {
+        if (data.employee === "Engineer"){
+            engineerQuestions();
+        }
+        else {
+            internQuestion();
+        }
+    });
+};
 
 newTeam();
