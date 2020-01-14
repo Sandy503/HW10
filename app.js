@@ -1,4 +1,5 @@
 //Global Variables
+const fs = require("fs");
 const inquirer = require("inquirer");
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
@@ -25,28 +26,32 @@ newTeam = () => {
         },
         {
             type: "input",
-            message: "PLease enter your email address.",
+            message: "Please enter your email address.",
             name: "email",
         },
         {
             type: "input",
             message: "Please enter your office number.",
-            name: "office",
+            name: "officeNumber",
         }
-    ]).then(manager => {
+    ]).then(data => {
         //Creating newManager Object defined in Manager.js
         const newManager = new Manager(
-            manager.name,
-            manager.id,
-            manager.email,
-            manager.office,
+            data.name,
+            data.id,
+            data.email,
+            data.officeNumber,
         );
+        //somthing should go here to push this info to html eventually
+
+        //
     }).then(() => {
         console.log("Thank You! Now, add your next team member.");
-        nextEmployee();
+        nextEmployee(); //Function defined below, starting on line 52
     });
 };
- 
+
+//This function is for transitioning from previous employee to next employee
 nextEmployee = () => {
     return inquirer.prompt([
         {
@@ -57,12 +62,109 @@ nextEmployee = () => {
         }
     ]).then(data => {
         if (data.employee === "Engineer"){
-            engineerQuestions();
+            engineerQuestions(); //Function defined below, starting on line 73
         }
         else {
-            internQuestion();
+            internQuestions();
         }
     });
 };
+
+engineerQuestions = () =>{
+    return inquirer.prompt([
+        {
+            type: "input",
+            message: "What is this engineer's name?",
+            name: "name",
+        },
+        {
+            type: "input",
+            message: "Please enter their id number.",
+            name: "id",
+        },
+        {
+            type: "input",
+            message: "Please enter their email address.",
+            name: "email",
+        },
+        {
+            type: "input",
+            message: "Please enter their github username",
+            name: "github",
+        },
+        {
+            type: "list",
+            message: "Would you like to add another employee? Or are you done adding?",
+            name: "continue",
+            choices:["Add another employee", "I am done adding employees"]
+        }
+    ]).then(data => {
+        const newEngineer = new Engineer(
+            data.name,
+            data.id,
+            data.email,
+            data.github
+        );
+        //somthing should go here to push this info to html eventually
+
+        //
+        if (data.continue === "Add another employee"){
+            nextEmployee();
+        }
+        else{
+            //Write Html Function goes here
+            console.log("Generating HTML page...")
+        }
+    });
+};
+
+internQuestions = () =>{
+    return inquirer.prompt([
+        {
+            type: "input",
+            message: "What is this intern's name?",
+            name: "name",
+        },
+        {
+            type: "input",
+            message: "Please enter their id number.",
+            name: "id",
+        },
+        {
+            type: "input",
+            message: "Please enter their email address.",
+            name: "email",
+        },
+        {
+            type: "input",
+            message: "Please enter their school name",
+            name: "school",
+        },
+        {
+            type: "list",
+            message: "Would you like to add another employee? Or are you done adding?",
+            name: "continue",
+            choices:["Add another employee", "I am done adding employees"]
+        }
+    ]).then(data => {
+        const newEngineer = new Engineer(
+            data.name,
+            data.id,
+            data.email,
+            data.school
+        );
+        //somthing should go here to push this info to html eventually
+
+        //
+        if (data.continue === "Add another employee"){
+            nextEmployee();
+        }
+        else{
+            //Write Html Function goes here
+            console.log("Generating HTML page...")
+        }
+    });
+};
+
 
 newTeam();
