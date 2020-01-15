@@ -6,7 +6,7 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
-
+//ARRAY ADD ARRAYS
 newTeam = () => {
     //Intro Messages
     console.log("This is the Team Generator")
@@ -65,7 +65,7 @@ nextEmployee = () => {
             engineerQuestions(); //Function defined below, starting on line 73
         }
         else {
-            internQuestions();
+            internQuestions(); //Function defined below, starting on line 121
         }
     });
 };
