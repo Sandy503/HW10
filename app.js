@@ -6,7 +6,9 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
-//ARRAY ADD ARRAYS
+const
+
+
 newTeam = () => {
     //Intro Messages
     console.log("This is the Team Generator")
@@ -147,7 +149,7 @@ internQuestions = () =>{
             choices:["Add another employee", "I am done adding employees"]
         }
     ]).then(data => {
-        const newEngineer = new Engineer(
+        const newEngineer = new Intern(
             data.name,
             data.id,
             data.email,
@@ -165,6 +167,8 @@ internQuestions = () =>{
         }
     });
 };
+
+
 
 
 newTeam();
